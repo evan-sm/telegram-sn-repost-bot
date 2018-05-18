@@ -122,7 +122,7 @@ def updInstPostDB(who):
 				print(key + ' inst post updated')
 	else:
 		q = Inst.create(key=key, time=inst_post_time)
-		print(who + ' Inst DB does not exists, creating...')
+		print(who + ' inst post DB does not exists, creating...')
 
 def updInstStoryDB(who, id):
 	key = who + '_story'
@@ -180,4 +180,4 @@ def updInstStoryDB(who, id):
 				print(key + ' inst post updated')
 	else:
 		q = Inst.create(key=key, time=inst_story_time)
-		print('Inst DB does not exists, creating...')
+		print(who + 'inst story DB does not exists, creating...')
