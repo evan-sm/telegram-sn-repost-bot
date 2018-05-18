@@ -50,7 +50,6 @@ def teleSendMediaGroup(who, media):
 	else:
 		chan = TELE_IWB_ID # t.me/InstagramWmwBot
 		TKN = TKN_TELE_IWB
-	print (media)
 	media = json.dumps(media)
 	URL_TELE_API = 'https://api.telegram.org/bot%s/' % TKN # Telegram API URL
 	data = {'chat_id' : chan, 'media': media}

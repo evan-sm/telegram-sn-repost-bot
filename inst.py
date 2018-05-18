@@ -157,7 +157,6 @@ def updInstStoryDB(who, id):
 						#print (desc)
 					if 'ad_action' in stories[s]:
 						promo_link = '[🔗 Промо-ссылка](' + stories[s]['story_cta'][0]['links'][0]['webUri'] + ')'
-						#promo_link = '[🔗 Промо-ссылка](yandex.ru/maps/?mode=search&text='+ stories[s]['story_cta'][0]['links'][0]['webUri'] +')'
 						desc = desc + '\n\n' + promo_link
 						#print (desc)
 					if stories[s]['story_locations']:
