@@ -7,7 +7,7 @@ import re
 from bs4 import BeautifulSoup
 
 from models import *
-from tele import teleSendURL, teleReportError, teleSendMediaGroup
+from tele import teleSendURL, teleReportError, teleSendMediaGroup, teleForwardMSG
 from tkn import story_headers, INST_ATKN
 
 def getGeolocation(id):
@@ -117,6 +117,11 @@ def updInstPostDB(who):
 				if r.status_code == 200:
 					q = Inst.update(key=key, time=inst_post_time).where(Inst.key == key)
 					q.execute()
+					# forwardMessage
+					r = json.loads(r.text)
+					from_chat_id = r['result']['chat']['id']
+					message_id = r['result']['message_id']
+					teleForwardMSG(who, from_chat_id, message_id)
 				else:
 					teleReportError(r.text)
 				print(key + ' inst post updated')
@@ -174,6 +179,11 @@ def updInstStoryDB(who, id):
 				if r.status_code == 200:
 					q = Inst.update(key=key, time=inst_story_time).where(Inst.key == key)
 					q.execute()
+					# forwardMessage
+					r = json.loads(r.text)
+					from_chat_id = r['result']['chat']['id']
+					message_id = r['result']['message_id']
+					teleForwardMSG(who, from_chat_id, message_id)
 				else:
 					teleReportError(r.text)
 				print(key + ' inst post updated')
