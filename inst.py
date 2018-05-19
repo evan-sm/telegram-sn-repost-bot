@@ -46,7 +46,7 @@ def getInstStoryJSON(id):
 		print (r.text)
 		teleReportError(r.text)
 	if not r_obj['latest_reel_media']:
-		print('empty, quit')
+		#print('empty, quit')
 		return False
 	else:
 		return r_obj
