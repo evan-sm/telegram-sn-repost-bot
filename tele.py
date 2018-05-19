@@ -23,6 +23,9 @@ def teleForwardMSG(who, from_chat_id, message_id):
 		chan = TELE_FAG_ID # fag refuge
 		TKN = TKN_TELE_SRS # sharishanyaBot
 		forward = True
+	elif who == INST1_NM:
+		chan = TELE_IWB_ID
+		TKN = TKN_TELE_OLYA
 	if forward == True:
 		URL_TELE_API = 'https://api.telegram.org/bot%s/' % TKN # Telegram API URL9
 		data = {'chat_id': chan, 'from_chat_id': from_chat_id, 'disable_notification': False, 'message_id': message_id}
