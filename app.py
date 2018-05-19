@@ -23,7 +23,10 @@ sleep(5)
 updInstPostDB(INST9_NM)
 sleep(5)
 updInstStoryDB(INST9_NM, INST9_ID)
-
+sleep(5)
+updInstPostDB(INST5_NM)
+sleep(5)
+updInstStoryDB(INST5_NM, INST5_ID)
 # Friends
 updInstPostDB(INST7_NM)
 sleep(5)
