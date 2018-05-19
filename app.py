@@ -8,11 +8,12 @@ from tele import teleSendMediaGroup
 # Olyasha and Sharisha
 updInstPostDB(INST2_NM)
 sleep(5)
+updInstStoryDB(INST2_NM, INST2_ID)
+sleep(5)
 updInstPostDB(INST1_NM)
 sleep(5)
 updInstStoryDB(INST1_NM, INST1_ID)
 sleep(5)
-updInstStoryDB(INST2_NM, INST2_ID)
 
 # Olyasha friends
 updInstPostDB(INST8_NM)
