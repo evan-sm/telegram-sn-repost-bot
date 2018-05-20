@@ -44,7 +44,7 @@ def vkSS(url):
 	im = im.crop((left, top, right, bottom))
 	#im = im.crop((360, 122, 500, 222))
 	#im.save('s.png')
-	img = StringIO.StringIO()
+	img = StringIO()
 	print (im)
 	im.save(img, format="png")
 	return img
