@@ -35,6 +35,28 @@ def teleForwardMSG(who, from_chat_id, message_id):
 		print (r)
 	return
 
+def teleSendPhotoSS(who, img, desc):
+	if who == INST3_NM:
+		chan = TELE_IWB_ID 
+		TKN = TKN_TELE_IWB
+	elif who == INST1_NM:
+		chan = TELE_OLYA_ID 
+		TKN = TKN_TELE_OLYA
+	elif who == INST2_NM:
+		chan = TELE_SRS_ID 
+		TKN = TKN_TELE_SRS
+	else:
+		chan = TELE_IWB_ID 
+		TKN = TKN_TELE_IWB
+	URL_TELE_API = 'https://api.telegram.org/bot%s/' % TKN # Telegram API URL
+	#remote_file = requests.get(url)
+	#file = io.BytesIO(img.content)
+	data = {'chat_id' : chan, 'caption': desc, 'parse_mode': 'Markdown'}
+	files = {'photo': img}
+	r = requests.post(URL_TELE_API + 'sendPhoto', files=files, data=data)	
+	print (r.text)	
+	return r
+
 def teleSendURL(url, who, desc, code, isvid):
 	if who == INST3_NM:
 		chan = TELE_IWB_ID 
@@ -78,5 +100,5 @@ def teleSendMediaGroup(who, media):
 	URL_TELE_API = 'https://api.telegram.org/bot%s/' % TKN # Telegram API URL
 	data = {'chat_id' : chan, 'media': media}
 	r = requests.post(URL_TELE_API + 'sendMediaGroup', data=data)
-	print (r.text)
+	#print (r.text)
 	return r
