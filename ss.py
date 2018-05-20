@@ -50,6 +50,6 @@ def vkSS(url):
 	content = img.getvalue()
 	return content
 
-img = vkSS('https://vk.com/wall-110043365_33563')
+img = vkSS('https://vk.com/wall153162173_1013212')
 #print(img)
 teleSendPhotoSS ('artembaccardi', img, 'pook')
