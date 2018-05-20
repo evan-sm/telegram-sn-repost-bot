@@ -47,7 +47,8 @@ def vkSS(url):
 	img = StringIO()
 	print (im)
 	im.save(img, format="png")
-	return img
+	content = img.getvalue()
+	return content
 
 img = vkSS('https://vk.com/wall-110043365_33563')
 print(img)
