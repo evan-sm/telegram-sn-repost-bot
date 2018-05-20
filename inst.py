@@ -140,7 +140,7 @@ def updInstStoryDB(who, id):
 		for i in q:
 			#i.time = 0
 			if i.time < inst_story_time:
-				print ('new story')
+				#print ('new story')
 				stories = []
 				inpmedia = []
 				#desc = '[instagram.com/' + who + '](Новая #InstagramStory)'
@@ -189,4 +189,4 @@ def updInstStoryDB(who, id):
 				print(key + ' inst post updated')
 	else:
 		q = Inst.create(key=key, time=inst_story_time)
-		print(who + 'inst story DB does not exists, creating...')
+		print(who + ' inst story DB does not exists, creating...')
