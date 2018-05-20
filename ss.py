@@ -28,9 +28,9 @@ def vkSS(url):
 	element = chrome.find_element_by_css_selector('div.wall_text')
 	# capture_element(element, chrome)
 	location = element.location
-	print(location)
+	#print(location)
 	size = element.size
-	print(size)
+	#print(size)
 	png = chrome.get_screenshot_as_png()
 	chrome.quit()
 
