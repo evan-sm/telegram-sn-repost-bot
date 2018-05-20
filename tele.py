@@ -52,7 +52,7 @@ def teleSendPhotoSS(who, img, desc):
 	#remote_file = requests.get(url)
 	#file = io.BytesIO(img.content)
 	data = {'chat_id' : chan, 'caption': desc, 'parse_mode': 'Markdown'}
-	files = {'photo': img}
+	files = {'photo': img.content}
 	r = requests.post(URL_TELE_API + 'sendPhoto', files=files, data=data)	
 	print (r.text)	
 	return r
