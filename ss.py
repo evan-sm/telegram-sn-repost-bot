@@ -45,11 +45,11 @@ def vkSS(url):
 	#im = im.crop((360, 122, 500, 222))
 	#im.save('s.png')
 	img = BytesIO()
-	print (im)
+	#print (im)
 	im.save(img, format="png")
 	content = img.getvalue()
 	return content
 
 img = vkSS('https://vk.com/wall-110043365_33563')
-print(img)
+#print(img)
 teleSendPhotoSS ('artembaccardi', img, 'pook')
