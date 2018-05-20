@@ -50,9 +50,9 @@ def teleSendPhotoSS(who, img, desc):
 		TKN = TKN_TELE_IWB
 	URL_TELE_API = 'https://api.telegram.org/bot%s/' % TKN # Telegram API URL
 	#remote_file = requests.get(url)
-	#file = io.BytesIO(img.content)
+	file = io.BytesIO(img.content)
 	data = {'chat_id' : chan, 'caption': desc, 'parse_mode': 'Markdown'}
-	files = {'photo': img.content}
+	files = {'photo': file}
 	r = requests.post(URL_TELE_API + 'sendPhoto', files=files, data=data)	
 	print (r.text)	
 	return r
