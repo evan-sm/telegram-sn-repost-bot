@@ -1,5 +1,5 @@
 from selenium import webdriver
-from io import BytesIO, StringIO
+from io import BytesIO
 from selenium.webdriver.chrome.options import Options
 from PIL import Image
 #import StringIO
@@ -51,5 +51,6 @@ def vkSS(url):
 	return content
 
 img = vkSS('https://vk.com/wall153162173_1013212')
+#img = vkSS('https://vk.com/wall-114631680_27177')
 #print(img)
 teleSendPhotoSS ('artembaccardi', img, 'pook')
