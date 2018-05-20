@@ -1,5 +1,5 @@
 from selenium import webdriver
-from io import BytesIO
+from io import BytesIO, StringIO
 from selenium.webdriver.chrome.options import Options
 from PIL import Image
 #import StringIO
@@ -44,7 +44,7 @@ def vkSS(url):
 	im = im.crop((left, top, right, bottom))
 	#im = im.crop((360, 122, 500, 222))
 	#im.save('s.png')
-	img = BytesIO()
+	img = StringIO.StringIO()
 	print (im)
 	im.save(img, format="png")
 	return img
