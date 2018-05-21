@@ -35,14 +35,14 @@ def teleForwardMSG(who, from_chat_id, message_id):
 		print (r)
 	return
 
-def teleSendPhotoSS(who, img, desc):
+def teleSendPhotoMem(who, img, desc, parse):
 	if who == INST3_NM:
 		chan = TELE_IWB_ID 
 		TKN = TKN_TELE_IWB
-	elif who == INST1_NM:
+	elif who == VK_GROUP_OLYA or VK_ID_OLYA:
 		chan = TELE_OLYA_ID 
 		TKN = TKN_TELE_OLYA
-	elif who == INST2_NM:
+	elif who == VK_ID_SHARISHA:
 		chan = TELE_SRS_ID 
 		TKN = TKN_TELE_SRS
 	else:
@@ -51,7 +51,7 @@ def teleSendPhotoSS(who, img, desc):
 	URL_TELE_API = 'https://api.telegram.org/bot%s/' % TKN # Telegram API URL
 	#remote_file = requests.get(url)
 	#file = img.seek(0)
-	data = {'chat_id' : chan, 'caption': desc, 'parse_mode': 'Markdown'}
+	data = {'chat_id' : chan, 'caption': desc, 'parse_mode': parse}
 	files = {'photo': img}
 	r = requests.post(URL_TELE_API + 'sendPhoto', files=files, data=data)	
 	print (r.text)	
@@ -73,7 +73,7 @@ def teleSendURL(url, who, desc, code, isvid):
 	URL_TELE_API = 'https://api.telegram.org/bot%s/' % TKN # Telegram API URL
 	remote_file = requests.get(url)
 	file = io.BytesIO(remote_file.content)
-	data = {'chat_id' : chan, 'caption': desc, 'parse_mode': 'Markdown'}
+	data = {'chat_id' : chan, 'caption': desc, 'parse_mode': 'HTML'}
 	if isvid == False:
 		files = {'photo': file}
 		r = requests.post(URL_TELE_API + 'sendPhoto', files=files, data=data)

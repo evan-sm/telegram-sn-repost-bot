@@ -7,7 +7,7 @@ import re
 from bs4 import BeautifulSoup
 
 from models import *
-from tele import teleSendURL, teleReportError, teleSendMediaGroup, teleForwardMSG
+from tele import teleSendURL, teleReportError, teleSendMediaGroup, teleForwardMSG, teleSendPhotoMem
 from tkn import story_headers, INST_ATKN
 
 def getGeolocation(id):
@@ -20,23 +20,47 @@ def getGeolocation(id):
 	else:
 		teleReportError(r.text)
 
+# def getInstPageJSON(inst):
+# 	web = urllib.request.urlopen('https://www.instagram.com/' + inst).read()
+# 	soup = BeautifulSoup(web, 'html.parser')
+# 	data  = soup.find_all("script")[2].string
+# 	p = re.compile('window._sharedData = (.*?);')
+# 	m = p.match(data)
+# 	stocks = json.loads(m.groups()[0])
+# 	return stocks
+
 def getInstPageJSON(inst):
-	web = urllib.request.urlopen('https://www.instagram.com/' + inst).read()
-	soup = BeautifulSoup(web, 'html.parser')
-	data  = soup.find_all("script")[2].string
-	p = re.compile('window._sharedData = (.*?);')
-	m = p.match(data)
-	stocks = json.loads(m.groups()[0])
-	return stocks
+	r = requests.get('https://www.instagram.com/' + inst)
+	soup = BeautifulSoup(r.content, 'html.parser')
+	scripts = soup.find_all('script', type="text/javascript", text=re.compile('window._sharedData'))
+	stringified_json = scripts[0].get_text().replace('window._sharedData = ', '')[:-1]
+	#print (stringified_json)
+	js = json.loads(stringified_json)
+	return js
+
+# def getInstPostJSON(code):
+# 	web = urllib.request.urlopen('https://www.instagram.com/p/' + code).read()
+# 	print('https://www.instagram.com/p/' + code)
+# 	print ('\n\n\n')
+# 	print (web)
+# 	print ('\n\n\n')
+# 	soup = BeautifulSoup(web, 'html.parser')
+# 	data  = soup.find_all("script")[2].string
+# 	p = re.compile('window._sharedData = (.*?);')
+# 	m = p.match(data)
+# 	print(m.groups()[0])
+# 	stocks = json.loads(m.groups()[0])
+# 	print(stocks)
+# 	return stocks
 
 def getInstPostJSON(code):
-	web = urllib.request.urlopen('https://www.instagram.com/p/' + code).read()
-	soup = BeautifulSoup(web, 'html.parser')
-	data  = soup.find_all("script")[2].string
-	p = re.compile('window._sharedData = (.*?);')
-	m = p.match(data)
-	stocks = json.loads(m.groups()[0])
-	return stocks
+	r = requests.get('https://www.instagram.com/p/' + code)
+	soup = BeautifulSoup(r.content, 'html.parser')
+	scripts = soup.find_all('script', type="text/javascript", text=re.compile('window._sharedData'))
+	stringified_json = scripts[0].get_text().replace('window._sharedData = ', '')[:-1]
+	#print (stringified_json)
+	js = json.loads(stringified_json)
+	return js
 
 def getInstStoryJSON(id):
 	URL_INST_STORY = 'https://i.instagram.com/api/v1/feed/user/' + str(id) + '/reel_media/'
@@ -55,6 +79,7 @@ def getInstStoryJSON(id):
 def updInstPostDB(who):
 	key = who + '_post'
 	js = getInstPageJSON(who)
+	#print(json.loads(js.text))
 	inst_post_time = js['entry_data']['ProfilePage'][0]['graphql']['user'] \
 		['edge_owner_to_timeline_media']['edges'][0]['node']['taken_at_timestamp']
 	inst_post_url = js['entry_data']['ProfilePage'][0]['graphql']['user'] \
@@ -77,18 +102,22 @@ def updInstPostDB(who):
 				#json = getInstPostJSON('qdtny9s3xR') # 1 photo
 				media = js['entry_data']['PostPage'][0]['graphql']['shortcode_media']
 				if media['edge_media_to_caption']['edges']: 
-						caption = media['edge_media_to_caption']['edges'][0]['node']['text']
-						if media['location']:
-							caption = caption[:160]
-							geo = getGeolocation(media['location']['id'])
-							geo_link = '\n\n[🌎 Геолокация](yandex.ru/maps/?mode=search&text='+ geo +')'
-							desc = '[Новый пост в #Instagram](instagram.com/p/'+ inst_post_code +')\n\n' + caption + geo_link
-						else:
-							caption = caption[:175]
-							desc = '[Новый пост в #Instagram](instagram.com/p/'+ inst_post_code +')\n\n' + caption
+					caption = media['edge_media_to_caption']['edges'][0]['node']['text']
+					if media['location']:
+						caption = caption[:181]
+						geo = getGeolocation(media['location']['id'])
+						#geo_link = ' | [🌎 Геолокация](yandex.ru/maps/?mode=search&text='+ geo +')'
+						geo_link = '\n<a href="yandex.ru/maps/?mode=search&text='+ geo +'">🌎 Гео</a>'
+						#desc = '[Instagram](instagram.com/p/'+ inst_post_code +')\n\n' + caption + geo_link
+						desc = caption + '\n\n<a href="instagram.com/p/'+ inst_post_code +'">🔗 Instagram</a>' + geo_link
+					else:
+						caption = caption[:187]
+						#desc = '[Новый пост в #Instagram](instagram.com/p/'+ inst_post_code +')\n\n' + caption
+						desc = caption + '\n\n<a href="instagram.com/p/'+ inst_post_code +'">🔗 Instagram</a>'
 				else:
-						desc = ''
+					desc = '<a href="instagram.com/p/'+ inst_post_code +'">🔗 Instagram</a>'
 				#print (media)
+				
 				if media['__typename'] == 'GraphImage':
 					print('GraphImage')
 					url = media['display_url']
@@ -153,26 +182,29 @@ def updInstStoryDB(who, id):
 						print('Adding new story to InputMedia!: ' + js['items'][s]['image_versions2']['candidates'][0]['url'])
 				for s in range(len(stories)):
 					#print('stories: ' + str(s))
-					desc = '[Новая #InstagramStory](instagram.com/' + who + ')'
+					#desc = '[Новая #InstagramStory](instagram.com/' + who + ')'
+					desc = '<a href="instagram.com/'+ who +'">🔗 InstagramStory</a>'
 					#print (desc)
 					if stories[s]['caption']:
 						caption = stories[s]['caption']['text']
-						caption = caption[:146]
-						desc = desc + '\n\n' + caption
+						caption = caption[:153]
+						desc = caption + '\n\n' + desc
 						#print (desc)
 					if 'ad_action' in stories[s]:
-						promo_link = '[🔗 Промо-ссылка](' + stories[s]['story_cta'][0]['links'][0]['webUri'] + ')'
-						desc = desc + '\n\n' + promo_link
+						#promo_link = '[🔗 Промо-ссылка](' + stories[s]['story_cta'][0]['links'][0]['webUri'] + ')'
+						promo_link = '<a href="' + stories[s]['story_cta'][0]['links'][0]['webUri'] + '">🔗 Промо-ссылка</a>'
+						desc = desc + '\n' + promo_link
 						#print (desc)
 					if stories[s]['story_locations']:
 						geo = str(stories[s]['story_locations'][0]['location']['lat']) + ';' + str(stories[s]['story_locations'][0]['location']['lng'])
-						geo_link = '[🌎 Геолокация](yandex.ru/maps/?mode=search&text='+ geo +')'
-						desc = desc + '\n\n' + geo_link
+						#geo_link = '[🌎 Геолокация](yandex.ru/maps/?mode=search&text='+ geo +')'
+						geo_link = '<a href="yandex.ru/maps/?mode=search&text='+ geo +'">🌎 Гео</a>'
+						desc = desc + '\n' + geo_link
 						#print (desc)
 					if stories[s]['media_type'] == 1: # image type
-						inpmedia.append({'type': 'photo', 'media': stories[s]['image_versions2']['candidates'][0]['url'], 'caption': desc, 'parse_mode': 'Markdown'})
+						inpmedia.append({'type': 'photo', 'media': stories[s]['image_versions2']['candidates'][0]['url'], 'caption': desc, 'parse_mode': 'HTML'})
 					else:
-						inpmedia.append({'type': 'video', 'media': stories[s]['video_versions'][0]['url'], 'caption': desc, 'parse_mode': 'Markdown'})
+						inpmedia.append({'type': 'video', 'media': stories[s]['video_versions'][0]['url'], 'caption': desc, 'parse_mode': 'HTML'})
 				#print (inpmedia)
 				r = teleSendMediaGroup(who, inpmedia)
 
