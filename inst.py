@@ -147,14 +147,14 @@ def updInstPostDB(who):
 					for s in range(len(media['edge_sidecar_to_children']['edges'])):
 						if media['edge_sidecar_to_children']['edges'][s]['node']['is_video'] == True:
 							if s == 0:
-								inpmedia.append({'type': 'video', 'media': media['edge_sidecar_to_children']['edges'][s]['node']['video_url'], 'caption': desc, 'parse_mode': 'Markdown'})
+								inpmedia.append({'type': 'video', 'media': media['edge_sidecar_to_children']['edges'][s]['node']['video_url'], 'caption': desc, 'parse_mode': 'HTML'})
 							else:
-								inpmedia.append({'type': 'video', 'media': media['edge_sidecar_to_children']['edges'][s]['node']['video_url']})
+								inpmedia.append({'type': 'video', 'media': media['edge_sidecar_to_children']['edges'][s]['node']['video_url'], 'parse_mode': 'HTML'})
 						else:
 							if s == 0:
-								inpmedia.append({'type': 'photo', 'media': media['edge_sidecar_to_children']['edges'][s]['node']['display_url'], 'caption': desc, 'parse_mode': 'Markdown'})
+								inpmedia.append({'type': 'photo', 'media': media['edge_sidecar_to_children']['edges'][s]['node']['display_url'], 'caption': desc, 'parse_mode': 'HTML'})
 							else:
-								inpmedia.append({'type': 'photo', 'media': media['edge_sidecar_to_children']['edges'][s]['node']['display_url']})	
+								inpmedia.append({'type': 'photo', 'media': media['edge_sidecar_to_children']['edges'][s]['node']['display_url'], 'parse_mode': 'HTML'})	
 					r = teleSendMediaGroup(who, inpmedia)
 				if r.status_code == 200:
 					q = Inst.update(key=key, time=inst_post_time).where(Inst.key == key)
