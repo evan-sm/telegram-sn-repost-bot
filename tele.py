@@ -14,16 +14,16 @@ def teleReportError(msg):
 
 def teleForwardMSG(who, from_chat_id, message_id):
 	forward = False
-	if who == INST3_NM: #  'artembaccardi'
+	if (who == INST3_NM) or (who == INST3_ID): #  'artembaccardi'
 		chan = TELE_TEST_ID # Chat test bot
 		TKN = TKN_TELE_IWB # 
 		forward = True
-	elif who == INST2_NM or INST2_ID:
+	elif (who == INST2_NM) or (who == INST2_ID):
 		print('sharisha')
 		chan = TELE_FAG_ID # fag refuge
 		TKN = TKN_TELE_SRS # sharishanyaBot
 		forward = True
-	elif who == INST1_NM:
+	elif (who == INST1_NM) or (who == INST1_ID):
 		chan = TELE_IWB_ID
 		TKN = TKN_TELE_OLYA
 		forward = True
