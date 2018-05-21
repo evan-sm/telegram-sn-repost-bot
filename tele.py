@@ -18,7 +18,7 @@ def teleForwardMSG(who, from_chat_id, message_id):
 		chan = TELE_TEST_ID # Chat test bot
 		TKN = TKN_TELE_IWB # 
 		forward = True
-	elif who == INST2_NM:
+	elif who == INST2_NM or INST2_ID:
 		print('sharisha')
 		chan = TELE_FAG_ID # fag refuge
 		TKN = TKN_TELE_SRS # sharishanyaBot
