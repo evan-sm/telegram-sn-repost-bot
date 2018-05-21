@@ -11,20 +11,15 @@ from tele import teleSendURL, teleReportError, teleSendMediaGroup, teleForwardMS
 from tkn import story_headers, INST_ATKN
 
 
-def cvtStoryEscapeText(txt):
-	html_escape_table = {
-	"&": "&amp;",
-	'"': "&quot;",
-	">": "&gt;",
-	"<": "&lt;",
-	}
+def EscTxt(txt):
+	html_escape_table = {"&": "&amp;", '"': "&quot;", ">": "&gt;", "<": "&lt;" }
 	#txt = html.unescape(txt)
-	print(txt)
-	txt = re.sub('<br\s*?>', '\n', txt)
-	print (txt)
+	#print(txt)
+	#txt = re.sub('<br\s*?>', '\n', txt)
+	#print (txt)
 	txt = "".join(html_escape_table.get(c,c) for c in txt)
 	print(txt)
-	return "".join(html_escape_table.get(c,c) for c in txt)
+	return txt
 
 def getGeolocation(id):
 	url = 'https://api.instagram.com/v1/locations/'+ id +'?access_token=' + INST_ATKN
@@ -119,8 +114,10 @@ def updInstPostDB(who):
 				media = js['entry_data']['PostPage'][0]['graphql']['shortcode_media']
 				if media['edge_media_to_caption']['edges']: 
 					caption = media['edge_media_to_caption']['edges'][0]['node']['text']
+					caption = EscTxt(caption)
 					if media['location']:
 						caption = caption[:181]
+						#caption = EscTxt(caption)
 						geo = getGeolocation(media['location']['id'])
 						#geo_link = ' | [🌎 Геолокация](yandex.ru/maps/?mode=search&text='+ geo +')'
 						geo_link = '\n<a href="yandex.ru/maps/?mode=search&text='+ geo +'">🌎 Гео</a>'
@@ -204,7 +201,7 @@ def updInstStoryDB(who, id):
 					if stories[s]['caption']:
 						caption = stories[s]['caption']['text']
 						caption = caption[:153]
-						caption = cvtStoryEscapeText(caption)
+						caption = EscTxt(caption)
 						desc = caption + '\n\n' + desc
 						#print (desc)
 					if 'ad_action' in stories[s]:

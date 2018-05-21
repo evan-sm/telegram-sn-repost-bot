@@ -8,6 +8,8 @@ from vkt import updVK
 
 #updVK(VK_GROUP_TEST)
 
+updInstStoryDB(INST3_NM, INST3_ID)
+updInstPostDB(INST3_NM)
 
 #Olyasha and Sharisha
 updInstPostDB(INST2_NM)
@@ -45,9 +47,3 @@ sleep(3)
 updInstPostDB(INST10_NM)
 sleep(3)
 updInstStoryDB(INST10_NM, INST10_ID)
-
-updVK(VK_GROUP_OLYA)
-sleep(3)
-updVK(VK_ID_OLYA)
-sleep(3)
-updVK(VK_ID_SHARISHA)

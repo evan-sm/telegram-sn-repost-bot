@@ -39,7 +39,10 @@ def teleSendPhotoMem(who, img, desc, parse):
 	if who == VK_GROUP_TEST:
 		chan = TELE_IWB_ID 
 		TKN = TKN_TELE_IWB
-	elif who == VK_GROUP_OLYA or VK_ID_OLYA:
+	elif who == VK_GROUP_OLYA:
+		chan = TELE_OLYA_ID 
+		TKN = TKN_TELE_OLYA
+	elif who == VK_ID_OLYA:
 		chan = TELE_OLYA_ID 
 		TKN = TKN_TELE_OLYA
 	elif who == VK_ID_SHARISHA:
