@@ -8,8 +8,8 @@ from vkt import updVK
 
 #updVK(VK_GROUP_TEST)
 
-updInstStoryDB(INST3_NM, INST3_ID)
-updInstPostDB(INST3_NM)
+# updInstStoryDB(INST3_NM, INST3_ID)
+# updInstPostDB(INST3_NM)
 
 #Olyasha and Sharisha
 updInstPostDB(INST2_NM)
