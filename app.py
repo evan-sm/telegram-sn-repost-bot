@@ -9,7 +9,7 @@ from vkt import updVK
 #updVK(VK_GROUP_TEST)
 
 
-Olyasha and Sharisha
+#Olyasha and Sharisha
 updInstPostDB(INST2_NM)
 sleep(3)
 updInstStoryDB(INST2_NM, INST2_ID)
