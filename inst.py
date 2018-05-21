@@ -205,7 +205,7 @@ def updInstStoryDB(who, id):
 						inpmedia.append({'type': 'photo', 'media': stories[s]['image_versions2']['candidates'][0]['url'], 'caption': desc, 'parse_mode': 'HTML'})
 					else:
 						inpmedia.append({'type': 'video', 'media': stories[s]['video_versions'][0]['url'], 'caption': desc, 'parse_mode': 'HTML'})
-				#print (inpmedia)
+				print (inpmedia)
 				r = teleSendMediaGroup(who, inpmedia)
 
 				if r.status_code == 200:
