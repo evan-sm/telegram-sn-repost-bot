@@ -11,12 +11,20 @@ from tele import teleSendURL, teleReportError, teleSendMediaGroup, teleForwardMS
 from tkn import story_headers, INST_ATKN
 
 
-def cvtStoryHtmlToText(txt):
-	txt = html.unescape(txt)
+def cvtStoryEscapeToText(txt):
+	html_escape_table = {
+	"&": "&amp;",
+	'"': "&quot;",
+	">": "&gt;",
+	"<": "&lt;",
+	}
+	#txt = html.unescape(txt)
 	print(txt)
 	txt = re.sub('<br\s*?>', '\n', txt)
 	print (txt)
-	return txt
+	txt = "".join(html_escape_table.get(c,c) for c in txt)
+	print(txt)
+	return "".join(html_escape_table.get(c,c) for c in txt)
 
 def getGeolocation(id):
 	url = 'https://api.instagram.com/v1/locations/'+ id +'?access_token=' + INST_ATKN
@@ -210,9 +218,9 @@ def updInstStoryDB(who, id):
 						desc = desc + '\n' + geo_link
 						#print (desc)
 					if stories[s]['media_type'] == 1: # image type
-						inpmedia.append({'type': 'photo', 'media': stories[s]['image_versions2']['candidates'][0]['url'], 'caption': cvtStoryHtmlToText(desc), 'parse_mode': 'HTML'})
+						inpmedia.append({'type': 'photo', 'media': stories[s]['image_versions2']['candidates'][0]['url'], 'caption': cvtStoryEscapeToText(desc), 'parse_mode': 'HTML'})
 					else:
-						inpmedia.append({'type': 'video', 'media': stories[s]['video_versions'][0]['url'], 'caption': cvtStoryHtmlToText(desc), 'parse_mode': 'HTML'})
+						inpmedia.append({'type': 'video', 'media': stories[s]['video_versions'][0]['url'], 'caption': cvtStoryEscapeToText(desc), 'parse_mode': 'HTML'})
 				print (inpmedia)
 				r = teleSendMediaGroup(who, inpmedia)
 
