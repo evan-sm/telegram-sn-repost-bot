@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import pdb
 from time import sleep
 from models import *
 from inst import updInstPostDB, getInstPostJSON, updInstStoryDB, getInstStoryJSON, getGeolocation
@@ -12,6 +13,7 @@ from vkt import updVK
 # updInstPostDB(INST3_NM)
 
 #Olyasha and Sharisha
+#pdb.set_trace()
 updInstPostDB(INST2_NM)
 sleep(3)
 updInstStoryDB(INST2_NM, INST2_ID)
