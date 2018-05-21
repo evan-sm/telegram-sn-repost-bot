@@ -225,6 +225,7 @@ def updInstStoryDB(who, id):
 					message_id = r['result']['message_id']
 					teleForwardMSG(who, from_chat_id, message_id)
 				else:
+					print(r.text)
 					teleReportError(r.text)
 				print(key + ' inst post updated')
 	else:
