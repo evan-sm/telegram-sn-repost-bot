@@ -219,9 +219,9 @@ def updInstStoryDB(who, id):
 						desc = desc + '\n' + geo_link
 						#print (desc)
 					if stories[s]['media_type'] == 1: # image type
-						inpmedia.append({'type': 'photo', 'media': stories[s]['image_versions2']['candidates'][0]['url'], 'caption': cvtStoryEscapeToText(desc), 'parse_mode': 'HTML'})
+						inpmedia.append({'type': 'photo', 'media': stories[s]['image_versions2']['candidates'][0]['url'], 'caption': desc, 'parse_mode': 'HTML'})
 					else:
-						inpmedia.append({'type': 'video', 'media': stories[s]['video_versions'][0]['url'], 'caption': cvtStoryEscapeToText(desc), 'parse_mode': 'HTML'})
+						inpmedia.append({'type': 'video', 'media': stories[s]['video_versions'][0]['url'], 'caption': desc, 'parse_mode': 'HTML'})
 				print (inpmedia)
 				r = teleSendMediaGroup(who, inpmedia)
 
