@@ -11,7 +11,7 @@ from tele import teleSendURL, teleReportError, teleSendMediaGroup, teleForwardMS
 from tkn import story_headers, INST_ATKN
 
 
-def cvtStoryEscapeToText(txt):
+def cvtStoryEscapeText(txt):
 	html_escape_table = {
 	"&": "&amp;",
 	'"': "&quot;",
@@ -204,6 +204,7 @@ def updInstStoryDB(who, id):
 					if stories[s]['caption']:
 						caption = stories[s]['caption']['text']
 						caption = caption[:153]
+						caption = cvtStoryEscapeText(caption)
 						desc = caption + '\n\n' + desc
 						#print (desc)
 					if 'ad_action' in stories[s]:
@@ -228,10 +229,10 @@ def updInstStoryDB(who, id):
 					q = Inst.update(key=key, time=inst_story_time).where(Inst.key == key)
 					q.execute()
 					# forwardMessage
-					r = json.loads(r.text)
-					from_chat_id = r['result']['chat']['id']
-					message_id = r['result']['message_id']
-					teleForwardMSG(who, from_chat_id, message_id)
+					#r = json.loads(r.text)
+					#from_chat_id = r['result']['chat']['id']
+					#message_id = r['result']['message_id']
+					#teleForwardMSG(who, from_chat_id, message_id)
 				else:
 					print(r.text)
 					teleReportError(r.text)
