@@ -13,8 +13,17 @@ class Inst(Model):
     class Meta:
         database = db_proxy
 
+class VK(Model):
+	who = TextField(unique=True) # timestamp
+	date = IntegerField(null=True) # timestamp
+	url = TextField(null=True)
+
+	class Meta:
+		database = db_proxy
+
 # Connect to DB
 db = PostgresqlDatabase(database=DATABASE_NAME, user=DATABASE_USER, password=DATABASE_PASSWORD, host=DATABASE_HOST)
 db_proxy.initialize(db)
 db_proxy.connect()
 db_proxy.create_tables([Inst], safe=True)
+db_proxy.create_tables([VK], safe=True)

@@ -5,7 +5,7 @@ from PIL import Image
 #import StringIO
 import os
 
-from tele import teleSendPhotoSS
+from tele import teleSendPhotoMem
 
 
 def vkSS(url):
@@ -50,7 +50,7 @@ def vkSS(url):
 	content = img.getvalue()
 	return content
 
-img = vkSS('https://vk.com/wall153162173_1013212')
+#img = vkSS('https://vk.com/wall153162173_1013212')
 #img = vkSS('https://vk.com/wall-114631680_27177')
 #print(img)
-teleSendPhotoSS ('artembaccardi', img, 'pook')
+#teleSendPhotoMem ('artembaccardi', img, 'pook')
