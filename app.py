@@ -8,6 +8,7 @@ from vkt import updVK
 
 updVK(VK_GROUP_TEST)
 
+
 # #Olyasha and Sharisha
 # updInstPostDB(INST2_NM)
 # sleep(5)
