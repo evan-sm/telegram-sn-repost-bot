@@ -226,10 +226,10 @@ def updInstStoryDB(who, id):
 					q = Inst.update(key=key, time=inst_story_time).where(Inst.key == key)
 					q.execute()
 					# forwardMessage
-					#r = json.loads(r.text)
-					#from_chat_id = r['result']['chat']['id']
-					#message_id = r['result']['message_id']
-					#teleForwardMSG(who, from_chat_id, message_id)
+					r = json.loads(r.text)
+					from_chat_id = r['result']['chat']['id']
+					message_id = r['result']['message_id']
+					teleForwardMSG(who, from_chat_id, message_id)
 				else:
 					print(r.text)
 					teleReportError(r.text)
