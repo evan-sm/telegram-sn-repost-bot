@@ -22,13 +22,13 @@ def updVK(who):
 	api = vk.API(session)
 	# Get last wall post
 	wall_post_obj = api.wall.get(owner_id=who, count=2, filter='owner', version=4.104, extended=1)
-	print (wall_post_obj)
+	#print (wall_post_obj)
 	#print(str(key)+' checking VK')
 	if wall_post_obj['wall'][1]['date'] < wall_post_obj['wall'][2]['date']:
 		i = 2
 	else:
 		i = 1
-	if 'post' in wall_post_obj['wall'][i]['post_type'] or 'repost' in wall_post_obj['wall'][i]['post_type']:
+	if 'post' in wall_post_obj['wall'][i]['post_type'] or 'copy' in wall_post_obj['wall'][i]['post_type']:
 		date = wall_post_obj['wall'][i]['date']
 		desc = wall_post_obj['wall'][i]['text']
 		link = 'https://vk.com/wall%s_%s' % (who, wall_post_obj['wall'][i]['id']) # example: https://vk.com/wall153162173_416168
