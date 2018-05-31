@@ -22,7 +22,7 @@ def updVK(who):
 	api = vk.API(session)
 	# Get last wall post
 	wall_post_obj = api.wall.get(owner_id=who, count=2, filter='owner', version=4.104, extended=1)
-	#print (wall_post_obj)
+	print (wall_post_obj)
 	#print(str(key)+' checking VK')
 	if wall_post_obj['wall'][1]['date'] < wall_post_obj['wall'][2]['date']:
 		i = 2
