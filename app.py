@@ -14,6 +14,7 @@ from vkt import updVK
 
 #Olyasha and Sharisha
 #pdb.set_trace()
+#print('hello world')
 updInstPostDB(INST2_NM)
 sleep(3)
 updInstStoryDB(INST2_NM, INST2_ID)
