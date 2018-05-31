@@ -28,7 +28,7 @@ def updVK(who):
 		i = 2
 	else:
 		i = 1
-	if 'post' in wall_post_obj['wall'][i]['post_type'] or 'copy' in wall_post_obj['wall'][i]['post_type']:
+	if 'post' in wall_post_obj['wall'][i]['post_type']:
 		date = wall_post_obj['wall'][i]['date']
 		desc = wall_post_obj['wall'][i]['text']
 		link = 'https://vk.com/wall%s_%s' % (who, wall_post_obj['wall'][i]['id']) # example: https://vk.com/wall153162173_416168
@@ -51,7 +51,7 @@ def updVK(who):
 						q = VK.update(date=date, url=link).where(VK.who == key)
 						q.execute()
 					else:
-						print('Cannot send telegram message, something went wrong!\n %s' & (r.text))
+						print('Cannot send telegram message, something went wrong!\n' + (r.text))
 						teleReportError(r.text)
 				#else:
 					#print('Nah, it is old vk wall post')
