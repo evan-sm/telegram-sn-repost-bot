@@ -28,7 +28,7 @@ def updVK(who):
 		i = 2
 	else:
 		i = 1
-	if 'post' in wall_post_obj['wall'][i]['post_type']:
+	if 'post' in wall_post_obj['wall'][i]['post_type'] or 'repost' in wall_post_obj['wall'][i]['post_type']:
 		date = wall_post_obj['wall'][i]['date']
 		desc = wall_post_obj['wall'][i]['text']
 		link = 'https://vk.com/wall%s_%s' % (who, wall_post_obj['wall'][i]['id']) # example: https://vk.com/wall153162173_416168
@@ -43,6 +43,7 @@ def updVK(who):
 					img = vkSS(link)
 					desc = desc[:194]
 					desc = desc + '\n\n<a href="' + link + '">🔗 VK</a>'
+					print (desc)
 					r = teleSendPhotoMem(who, img, cvtHtmlToText(desc), 'HTML')
 					#r = teleSendPhotoMem(who, img, desc)
 					r_obj = json.loads(r.text)

@@ -19,7 +19,7 @@ def vkSS(url):
 	chrome_options.add_argument("--disable-accelerated-2d-canvas")
 	chrome_options.add_argument("--disable-accelerated-jpeg-decoding")
 	chrome_options.add_argument("--no-sandbox")
-	
+	print ('chrome options')
 	chrome_driver = "chromedriver"
 	
 	chrome = webdriver.Chrome(chrome_options=chrome_options, executable_path=chrome_driver)
