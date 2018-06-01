@@ -145,6 +145,10 @@ def updInstPostDB(who):
 					inpmedia = []
 					# Prepare InputMedia array for telegram sendMediaGroup	
 					for s in range(len(media['edge_sidecar_to_children']['edges'])):
+						if s == 10:
+							inst_post_time = media['edge_sidecar_to_children']['edges'][s]['node']['taken_at']
+							print (media)
+							break
 						if media['edge_sidecar_to_children']['edges'][s]['node']['is_video'] == True:
 							if s == 0:
 								inpmedia.append({'type': 'video', 'media': media['edge_sidecar_to_children']['edges'][s]['node']['video_url'], 'caption': desc, 'parse_mode': 'HTML'})
