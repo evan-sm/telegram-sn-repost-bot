@@ -220,12 +220,7 @@ def updInstStoryDB(who, id):
 					else:
 						inpmedia.append({'type': 'video', 'media': stories[s]['video_versions'][0]['url'], 'caption': desc, 'parse_mode': 'HTML'})
 					if s == 9:
-						print('\n')
-						print (stories[s])
-						print('\n')
-						print ('breaking')
 						inst_story_time = stories[s]['taken_at']
-						print(inst_story_time)
 						break
 				print (inpmedia)
 				r = teleSendMediaGroup(who, inpmedia)
