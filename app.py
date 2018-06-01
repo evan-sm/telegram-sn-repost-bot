@@ -24,12 +24,6 @@ sleep(3)
 updInstStoryDB(INST1_NM, INST1_ID)
 sleep(3)
 
-updVK(VK_GROUP_OLYA)
-sleep(3)
-updVK(VK_ID_OLYA)
-sleep(3)
-updVK(VK_ID_SHARISHA)
-
 # Olyasha friends
 updInstPostDB(INST8_NM)
 sleep(3)
@@ -50,3 +44,9 @@ sleep(3)
 updInstPostDB(INST10_NM)
 sleep(3)
 updInstStoryDB(INST10_NM, INST10_ID)
+
+updVK(VK_GROUP_OLYA)
+sleep(3)
+updVK(VK_ID_OLYA)
+sleep(3)
+updVK(VK_ID_SHARISHA)
