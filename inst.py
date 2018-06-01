@@ -194,12 +194,6 @@ def updInstStoryDB(who, id):
 						stories.append(js['items'][s])
 						print('Adding new story to InputMedia!: ' + js['items'][s]['image_versions2']['candidates'][0]['url'])
 				for s in range(len(stories)):
-					if s == 10:
-						print (stories[s])
-						print ('breaking')
-						inst_story_time = stories[s]['image_versions2']['candidates'][0]['taken_at']
-						print(inst_story_time)
-						break
 					#print('stories: ' + str(s))
 					#desc = '[Новая #InstagramStory](instagram.com/' + who + ')'
 					desc = '<a href="instagram.com/'+ who +'">🔗 InstagramStory</a>'
@@ -225,6 +219,14 @@ def updInstStoryDB(who, id):
 						inpmedia.append({'type': 'photo', 'media': stories[s]['image_versions2']['candidates'][0]['url'], 'caption': desc, 'parse_mode': 'HTML'})
 					else:
 						inpmedia.append({'type': 'video', 'media': stories[s]['video_versions'][0]['url'], 'caption': desc, 'parse_mode': 'HTML'})
+					if s == 9:
+						print('\n')
+						print (stories[s])
+						print('\n')
+						print ('breaking')
+						inst_story_time = stories[s]['taken_at']
+						print(inst_story_time)
+						break
 				print (inpmedia)
 				r = teleSendMediaGroup(who, inpmedia)
 
