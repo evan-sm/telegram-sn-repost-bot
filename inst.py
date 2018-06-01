@@ -145,10 +145,6 @@ def updInstPostDB(who):
 					inpmedia = []
 					# Prepare InputMedia array for telegram sendMediaGroup	
 					for s in range(len(media['edge_sidecar_to_children']['edges'])):
-						if s == 10:
-							inst_post_time = media['edge_sidecar_to_children']['edges'][s]['node']['taken_at']
-							print (media)
-							break
 						if media['edge_sidecar_to_children']['edges'][s]['node']['is_video'] == True:
 							if s == 0:
 								inpmedia.append({'type': 'video', 'media': media['edge_sidecar_to_children']['edges'][s]['node']['video_url'], 'caption': desc, 'parse_mode': 'HTML'})
@@ -198,6 +194,12 @@ def updInstStoryDB(who, id):
 						stories.append(js['items'][s])
 						print('Adding new story to InputMedia!: ' + js['items'][s]['image_versions2']['candidates'][0]['url'])
 				for s in range(len(stories)):
+					if s == 10:
+						print (stories[s])
+						print ('breaking')
+						inst_story_time = stories[s]['image_versions2']['candidates'][0]['taken_at']
+						print(inst_story_time)
+						break
 					#print('stories: ' + str(s))
 					#desc = '[Новая #InstagramStory](instagram.com/' + who + ')'
 					desc = '<a href="instagram.com/'+ who +'">🔗 InstagramStory</a>'
