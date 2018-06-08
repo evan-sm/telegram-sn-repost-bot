@@ -16,7 +16,6 @@ from vkt import updVK
 #pdb.set_trace()
 #print('hello world')
 updInstPostDB(INST2_NM)
-<<<<<<< HEAD
 sleep(2)
 updInstStoryDB(INST2_NM, INST2_ID)
 sleep(2)
@@ -36,8 +35,6 @@ updInstStoryDB(INST9_NM, INST9_ID)
 sleep(2)
 updInstPostDB(INST5_NM)
 sleep(2)
-=======
-sleep(3)
 updInstStoryDB(INST2_NM, INST2_ID)
 sleep(3)
 updInstPostDB(INST1_NM)
@@ -56,7 +53,6 @@ updInstStoryDB(INST9_NM, INST9_ID)
 sleep(3)
 updInstPostDB(INST5_NM)
 sleep(3)
->>>>>>> baa4a0967274753a6a4dcf692e3a3c024ca7e89c
 updInstStoryDB(INST5_NM, INST5_ID)
 sleep(2)
 updInstPostDB(INST11_NM)
@@ -64,19 +60,15 @@ sleep(3)
 updInstStoryDB(INST11_NM, INST11_ID)
 # Friends
 updInstPostDB(INST7_NM)
-<<<<<<< HEAD
 sleep(2)
 updInstStoryDB(INST7_NM, INST7_ID)
 sleep(2)
 updInstPostDB(INST10_NM)
 sleep(2)
-=======
-sleep(3)
 updInstStoryDB(INST7_NM, INST7_ID)
 sleep(3)
 updInstPostDB(INST10_NM)
 sleep(3)
->>>>>>> baa4a0967274753a6a4dcf692e3a3c024ca7e89c
 updInstStoryDB(INST10_NM, INST10_ID)
 
 updVK(VK_GROUP_OLYA)
